@@ -1,0 +1,120 @@
+<div class="col-sm-12 col-md-10 col-md-offset-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Total</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cartItem of cart">
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{cartItem.image}}"
+                                style="width: 72px; height: 72px;"> </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="#">{{cartItem.name}}</a></h4>
+                            <h5 class="media-heading"> by <a href="#">MicroAgility</a></h5>
+                            <span>Status: </span><span class="text-warning"><strong>In Stock</strong></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-1 col-md-1" style="text-align: center">
+                    <input type="number" class="form-control" id="exampleInputEmail1"
+                        (input)="quantityUpdate($event,cartItem)" value={{cartItem.quantity}}>
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{cartItem.price}}$</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>{{cartItem.price*cartItem.quantity}}$</strong></td>
+                <td class="col-sm-1 col-md-1">
+                    <button (click)="removeFromCart(cartItem)" type="button" class="btn btn-danger">
+                        <span class="fa fa-remove"></span> Remove
+                    </button></td>
+
+
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <h5>Subtotal</h5>
+                </td>
+                <td class="text-right">
+                    <h5><strong>${{total}}</strong></h5>
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <h5>Estimated shipping</h5>
+                </td>
+                <td class="text-right">
+                    <h5><strong>${{(total>0)?5:0}}</strong></h5>
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <h3>Total</h3>
+                </td>
+                <td class="text-right">
+                    <h3><strong>${{total>0?total+5:total}}</strong></h3>
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <button routerLink='' type="button" class="btn btn-default">
+                        <span class="fa fa-shopping-cart"></span> Continue Shopping
+                    </button></td>
+                <td>
+                    <button routerLink='/checkout' type="button" [disabled]="total<=0" class="btn btn-success">
+                        Checkout <span class="fa fa-play"></span>
+                    </button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="toast__container" [ngStyle]="{'display': toast}">
+    <div class="toast__cell">
+        <div class="toast toast--blue add-margin">
+            <div class="toast__icon">
+                <svg version="1.1" class="toast__svg" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32"
+                    style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                    <g>
+                        <g id="info">
+                            <g>
+                                <path
+                                    d="M10,16c1.105,0,2,0.895,2,2v8c0,1.105-0.895,2-2,2H8v4h16v-4h-1.992c-1.102,0-2-0.895-2-2L20,12H8     v4H10z">
+                                </path>
+                                <circle cx="16" cy="4" r="4"></circle>
+                            </g>
+                        </g>
+                    </g>
+
+                </svg>
+            </div>
+            <div class="toast__content">
+                <p class="toast__type">Info</p>
+                <p class="toast__message">{{toastMessage}}</p>
+            </div>
+            <div class="toast__close">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.642 15.642"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 15.642 15.642">
+                    <path fill-rule="evenodd"
+                        d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061  c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061  l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541  l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
